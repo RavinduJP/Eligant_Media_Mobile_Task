@@ -18,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _listViewController = ScrollController();
 
+//call the API services with base url
   final ApiService apiService = ApiService(
       baseUrl: 'https://dl.dropboxusercontent.com/s/6nt7fkdt7ck0lue');
 
@@ -79,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 10.h,
           ),
+          //List view
           FutureBuilder<List<dynamic>>(
             future: _futureData,
             builder: (context, snapshot) {
@@ -133,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        // 'Title',
                                         data[index]['title'],
                                         style: const TextStyle(
                                           color: AppColors.whiteColor,
@@ -145,7 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         softWrap: true,
                                       ),
                                       Text(
-                                        // 'Address',
                                         data[index]['address'],
                                         style: const TextStyle(
                                           color: AppColors.whiteColor,

@@ -20,11 +20,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = "", password = "";
 
+//Asign to the form fields in Text Editing Controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
+//form validation
   userLogin() async {
     try {
       await FirebaseAuth.instance
@@ -98,6 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(
             height: 10.h,
           ),
+          //sign in button
           CustomButton(
             bordercolor: AppColors.secondary,
             borderWidth: 1.0,
@@ -134,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              //google authentication button
               GestureDetector(
                 child: authenticationBtn(
                     image: 'assets/images/google.png',
@@ -145,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 15.h,
               ),
+              //faceboook authentication button
               GestureDetector(
                 child: authenticationBtn(
                     image: 'assets/images/facebook.png',

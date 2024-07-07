@@ -19,6 +19,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   String name = '', email = '', password = '', reTypePassword = '';
 
+//Asign to the form fields in Text Editing Controllers
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -26,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final _formkey = GlobalKey<FormState>();
 
+//form validation 
   registration() async {
     if (password != null &&
         _nameController.text != "" &&
@@ -113,6 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: 70.h,
             ),
+            //sign up button
             CustomButton(
               bordercolor: AppColors.secondary,
               borderWidth: 1.0,

@@ -1,6 +1,6 @@
 class Dimension {
   Dimension._();
-
+//common application dimentions
   static const screenWidthFactor = 8.0;
   static const formTopMargin = 50.0;
   static const formAndSubheddingGap = 25.0;

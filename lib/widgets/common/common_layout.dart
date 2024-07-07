@@ -31,6 +31,7 @@ class CommonLayout extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: appBar,
+        //use single child scrollview for scorlling the all screen
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(

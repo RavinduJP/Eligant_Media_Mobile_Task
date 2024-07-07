@@ -1,6 +1,7 @@
 class Routes {
   Routes._();
 
+//define the page routes
   static const splashScreen = '/splash-screen';
   static const loginScreen = '/login-screen';
   static const signUpScreen = '/signUp-screen';
