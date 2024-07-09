@@ -16,7 +16,8 @@ class CustomTextFromField extends StatelessWidget {
     this.keyboardType,
     this.isEnableSuffixIcon = false,
     this.onTap,
-    this.obsecureText = false,
+    this.obsecureText = false, 
+    
   });
 
   final TextEditingController controller;

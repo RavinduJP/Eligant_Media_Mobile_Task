@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testproject/screen/home_screen.dart';
+import 'package:testproject/services/auth.dart';
 import 'package:testproject/widgets/common/common_layout.dart';
 import 'package:testproject/widgets/common/custom_button.dart';
 import 'package:testproject/widgets/common/custom_text_form_field.dart';
@@ -58,133 +59,138 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundImage: true,
       image: 'assets/images/login.jpg',
       hedingTitle: 'Login',
-      body: Column(
-        children: [
-          SizedBox(
-            height: 100.h,
-          ),
-          CustomTextFromField(
-            controller: _emailController,
-            lableText: 'Email Address',
-            hintText: 'Enter Your Email Addres',
-            keyboardType: TextInputType.emailAddress,
-          ),
-          CustomTextFromField(
-            controller: _passwordController,
-            lableText: 'Password',
-            hintText: 'Enter Your Password',
-            obsecureText: true,
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              CommonText(
-                text: 'Forgot your ',
-                whiteTextSize: 11.r,
-                // alignment: Alignment.topLeft
-              ),
-              CommonText(
-                text: 'Password?',
-                whiteTextSize: 12.r,
-                fontWeight: FontWeight.bold,
-                textColor: AppColors.secondary,
-                underLine: TextDecoration.underline,
-                underlineColor: AppColors.secondary,
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          //sign in button
-          CustomButton(
-            bordercolor: AppColors.secondary,
-            borderWidth: 1.0,
-            color: AppColors.secondary,
-            boxShape: BoxShape.rectangle,
-            buttonText: 'Sign In',
-            btnTextColor: AppColors.whiteColor,
-            btnFontSize: 14.r,
-            btnFontWeight: FontWeight.w500,
-            onTap: () {
-              if (_formkey.currentState!.validate()) {
-                setState(() {
-                  email = _emailController.text;
-                  password = _passwordController.text;
-                });
-              }
-              userLogin();
-              // Navigator.of(context).pushNamed(Routes.homeScreen);
-            },
-          ),
-          SizedBox(
-            height: 25.h,
-          ),
-          CommonText(
-            text: 'OR ',
-            whiteTextSize: 15.r,
-            fontWeight: FontWeight.bold,
-            textColor: AppColors.secondary,
-            underlineColor: AppColors.secondary,
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //google authentication button
-              GestureDetector(
-                child: authenticationBtn(
-                    image: 'assets/images/google.png',
-                    fillColor: AppColors.whiteColor,
-                    authBtnText: 'Sign In With Google',
-                    textColor: AppColors.primary),
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              //faceboook authentication button
-              GestureDetector(
-                child: authenticationBtn(
-                    image: 'assets/images/facebook.png',
-                    fillColor: AppColors.secondary,
-                    authBtnText: 'Sign In With Facebook',
-                    textColor: AppColors.whiteColor),
-                onTap: () {},
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CommonText(
-                text: "Don’t have an account? ",
-                whiteTextSize: 11.r,
-                // alignment: Alignment.topLeft
-              ),
-              CommonText(
-                text: 'Sign Up',
-                whiteTextSize: 13.r,
-                fontWeight: FontWeight.bold,
-                textColor: AppColors.secondary,
-                underLine: TextDecoration.underline,
-                underlineColor: AppColors.secondary,
-                onTap: () {
-                  Navigator.of(context).pushNamed(Routes.signUpScreen);
-                },
-              ),
-            ],
-          ),
-        ],
+      body: Form(
+        key: _formkey,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 100.h,
+            ),
+            CustomTextFromField(
+              controller: _emailController,
+              lableText: 'Email Address',
+              hintText: 'Enter Your Email Addres',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            CustomTextFromField(
+              controller: _passwordController,
+              lableText: 'Password',
+              hintText: 'Enter Your Password',
+              obsecureText: true,
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CommonText(
+                  text: 'Forgot your ',
+                  whiteTextSize: 11.r,
+                  // alignment: Alignment.topLeft
+                ),
+                CommonText(
+                  text: 'Password?',
+                  whiteTextSize: 12.r,
+                  fontWeight: FontWeight.bold,
+                  textColor: AppColors.secondary,
+                  underLine: TextDecoration.underline,
+                  underlineColor: AppColors.secondary,
+                  onTap: () {},
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            //sign in button
+            CustomButton(
+              bordercolor: AppColors.secondary,
+              borderWidth: 1.0,
+              color: AppColors.secondary,
+              boxShape: BoxShape.rectangle,
+              buttonText: 'Sign In',
+              btnTextColor: AppColors.whiteColor,
+              btnFontSize: 14.r,
+              btnFontWeight: FontWeight.w500,
+              onTap: () async {
+                if (_formkey.currentState!.validate()) {
+                  setState(() {
+                    email = _emailController.text;
+                    password = _passwordController.text;
+                  });
+                }
+                await userLogin();
+                // Navigator.of(context).pushNamed(Routes.homeScreen);
+              },
+            ),
+            SizedBox(
+              height: 25.h,
+            ),
+            CommonText(
+              text: 'OR ',
+              whiteTextSize: 15.r,
+              fontWeight: FontWeight.bold,
+              textColor: AppColors.secondary,
+              underlineColor: AppColors.secondary,
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //google authentication button
+                GestureDetector(
+                  child: authenticationBtn(
+                      image: 'assets/images/google.png',
+                      fillColor: AppColors.whiteColor,
+                      authBtnText: 'Sign In With Google',
+                      textColor: AppColors.primary),
+                  onTap: () {
+                    AuthMethods().signInWithGoogle(context);
+                  },
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                //faceboook authentication button
+                GestureDetector(
+                  child: authenticationBtn(
+                      image: 'assets/images/facebook.png',
+                      fillColor: AppColors.secondary,
+                      authBtnText: 'Sign In With Facebook',
+                      textColor: AppColors.whiteColor),
+                  onTap: () {},
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CommonText(
+                  text: "Don’t have an account? ",
+                  whiteTextSize: 11.r,
+                  // alignment: Alignment.topLeft
+                ),
+                CommonText(
+                  text: 'Sign Up',
+                  whiteTextSize: 13.r,
+                  fontWeight: FontWeight.bold,
+                  textColor: AppColors.secondary,
+                  underLine: TextDecoration.underline,
+                  underlineColor: AppColors.secondary,
+                  onTap: () {
+                    Navigator.of(context).pushNamed(Routes.signUpScreen);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

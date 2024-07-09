@@ -39,7 +39,7 @@ class RouteGenerator {
 
         case Routes.mapViewScreen:
         return MaterialPageRoute(
-          builder: (_) => const MapViewScreen(),
+          builder: (_) => const MapViewScreen(data: {},),
         );
 
       default:
