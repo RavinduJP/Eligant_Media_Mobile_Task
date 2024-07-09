@@ -10,6 +10,7 @@
 - The map view also same for the emulator. 
 
 The git hub repo of the project - https://github.com/RavinduJP/Eligant_Media_Mobile_Task
+
 The video of the screen recode - https://drive.google.com/file/d/18Wda5rE3Pay5UTz7rh7c0pUWEDcyxv2H/view?usp=sharing
 
 APK - https://drive.google.com/file/d/1H30MmF579A4stwkQAlfrWYejoyAHAN9D/view?usp=sharing
